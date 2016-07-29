@@ -1,6 +1,6 @@
 package com.lombardo;
 
-import java.util.List;
+import com.lombardo.model.ToDoList;
 
 public class Main {
 
@@ -9,6 +9,6 @@ public class Main {
         list.populateFrom("list.txt");
         ToDoController controller = new ToDoController(list);
         controller.run();
-        list.saveTo("list.txt", list);
+        list.saveTo("list.txt");
     }
 }

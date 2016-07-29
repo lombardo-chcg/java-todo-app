@@ -1,11 +1,12 @@
 package com.lombardo;
 
 import com.lombardo.model.ToDo;
+import com.lombardo.model.ToDoList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ToDoController {
@@ -29,6 +30,7 @@ public class ToDoController {
         for (Map.Entry<String, String> option : mMenu.entrySet()) {
             System.out.printf("%s - %s %n", option.getKey(), option.getValue());
         }
+        System.out.printf("%n%n");
         System.out.print("Please choose an option: ");
     }
 
@@ -41,6 +43,8 @@ public class ToDoController {
         String choice = "";
         do {
             try {
+                mList.printList();
+                System.out.printf("%n");
                 printMenu();
                 choice = getUserMenuChoice();
                 switch (choice) {
@@ -51,16 +55,23 @@ public class ToDoController {
                         System.out.print("Enter Task :");
                         String task = mReader.readLine();
                         mList.addTask(new ToDo(task, false));
-                        System.out.printf("Task %s added %n", task);
+                        System.out.printf("Task %s added %n%n%n", task);
                         break;
                     case "complete":
-
+                        System.out.print("Enter number of task to mark complete :");
+                        ToDo toDoToComplete = mList.getToDo(promptUserForMenuChoice() - 1);
+                        mList.markTaskComplete(toDoToComplete);
+                        System.out.printf("Task %s marked complete %n%n%n", toDoToComplete);
                         break;
                     case "delete":
-
+                        System.out.print("Enter number of task to delete :");
+                        ToDo toDoToDelete = mList.getToDo(promptUserForMenuChoice() - 1);
+                        mList.removeTask(toDoToDelete);
+                        System.out.printf("Task %s deleted %n%n%n", toDoToDelete);
                         break;
                     case "quit":
-
+                        System.out.println("See you next time....");
+                        System.out.println("Saving list");
                         break;
                     default:
                         System.out.println("whoops please try again");
@@ -71,6 +82,12 @@ public class ToDoController {
             }
         }
         while (!choice.equals("quit"));
+    }
+
+    private int promptUserForMenuChoice() throws IOException {
+        String taskNumberAsString = mReader.readLine();
+        int taskNumber = Integer.parseInt(taskNumberAsString);
+        return taskNumber;
     }
 
 }

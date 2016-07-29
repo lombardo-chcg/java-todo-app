@@ -6,7 +6,14 @@ public class ToDo {
 
     public ToDo(String description, Boolean isComplete) {
         mDescription = description;
-        mIsComplete = false;
+        mIsComplete = isComplete;
+    }
+
+    @Override
+    public String toString() {
+        return "ToDo{" +
+                "mDescription='" + mDescription + '\'' +
+                '}';
     }
 
     public String getDescription() {

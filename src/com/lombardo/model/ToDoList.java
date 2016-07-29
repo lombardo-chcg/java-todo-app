@@ -1,6 +1,4 @@
-package com.lombardo;
-
-import com.lombardo.model.ToDo;
+package com.lombardo.model;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,6 +21,10 @@ public class ToDoList {
         currentToDo.markComplete();
     }
 
+    public ToDo getToDo(int index) {
+        return mList.get(index);
+    }
+
     public void removeTask(ToDo todo) {
         mList.remove(todo);
     }
@@ -36,9 +38,10 @@ public class ToDoList {
             } else {
                 status = "[   ]";
             }
-            System.out.printf("%d - %s %s %n", counter, todo.getDescription(), status);
+            System.out.printf("%d - %s %s %n", counter, status, todo.getDescription());
             counter++;
         }
+        System.out.printf("%n%n");
     }
 
     public void populateFrom(String filename) {
@@ -58,7 +61,7 @@ public class ToDoList {
         }
     }
 
-    public void saveTo(String filename, ToDoList toDoList) {
+    public void saveTo(String filename) {
         try (
                 FileOutputStream fos = new FileOutputStream(filename);
                 PrintWriter writer = new PrintWriter(fos);
@@ -76,7 +79,7 @@ public class ToDoList {
 
     private Boolean convertStringToBoolean(String string) {
         Boolean result;
-        if (string == "True") {
+        if (string.equals("true")) {
             result = true;
         } else {
             result = false;
