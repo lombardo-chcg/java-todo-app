@@ -1,2 +1,1 @@
 build a java API|false
-eat a hot dog|true

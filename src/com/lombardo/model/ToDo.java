@@ -11,9 +11,7 @@ public class ToDo {
 
     @Override
     public String toString() {
-        return "ToDo{" +
-                "mDescription='" + mDescription + '\'' +
-                '}';
+        return mDescription;
     }
 
     public String getDescription() {

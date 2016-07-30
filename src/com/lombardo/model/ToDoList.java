@@ -11,6 +11,10 @@ public class ToDoList {
         mList = new ArrayList<ToDo>();
     }
 
+    public int getLength() {
+        return mList.size();
+    }
+
     public void addTask(ToDo todo) {
         mList.add(todo);
     }
